@@ -1,0 +1,17 @@
+name: Download MEGA File
+on:
+  workflow_dispatch:
+    inputs:
+      mega_url:
+        description: 'Mega Link'
+        required: true
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Megatools
+        run: sudo apt-get install megatools
+      - name: Download File
+        run: megadownload "${{ github.event.inputs.mega_url }}"
+      - name: List Files
+        run: ls -lh
